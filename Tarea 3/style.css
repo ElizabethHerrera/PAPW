@@ -1,0 +1,45 @@
+body {
+    background-image: url("img/bg.png");
+    background-repeat: repeat;
+}
+h1{
+    color: turquoise;
+    text-align: center;
+}
+hr{
+    border: 3px solid turquoise;  
+}
+table{
+    background: white;
+    padding: 10px;
+}
+table th { color:turquoise; }
+a {
+    color:blue;
+    text-decoration: none;
+}
+a:hover{
+    color: green;
+}
+#top{
+    height: 40px;
+    background: white;
+}
+#imagen{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 5%;
+}
+.insideContainer{ display: inline-block; }
+
+.descripcion{ 
+    width: 520px; 
+    text-align: justify;
+}
+
+#table_InsideContainer{
+    border: 5px dotted white;
+    width: 45%;
+    float: right;
+}
