@@ -37,7 +37,14 @@ a:hover{
     width: 520px; 
     text-align: justify;
 }
-
+ul{
+    list-style-type: none;
+}
+.liBackgroundColor{
+    background-color: turquoise;
+    color: white;
+    padding: 5px;
+}
 #table_InsideContainer{
     border: 5px dotted white;
     width: 45%;
