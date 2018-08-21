@@ -1,0 +1,47 @@
+body {
+    background-image: url("img/bg.png");
+    background-repeat: repeat;
+}
+#menu{
+    position: fixed;
+    background-color: black;
+    width: 98%;
+    border-radius: 3px;
+    top: 0;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    top: 0;
+    list-style-type: none;
+}
+li{
+    float: left;
+    padding: 10px;
+}
+li a{
+    display: block;
+    text-decoration: none;
+    color:white;
+}
+li:hover{
+    background-color: pink;
+    
+}
+.container{
+    margin: 5%;
+}
+.container h1{
+    width: 100%;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 3px;
+    color: pink;
+}
+.container img{
+    
+    border-radius: 3px;
+    max-width: 500px;
+    max-height: 200px;
+    margin: 0;
+}
