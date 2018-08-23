@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Registro</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+        <script>
+            function readImagen(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e){
+                        $('#imagen')
+                        .attr('src', e.target.result);
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="menu">
+            <ul>
+                <li><a href="../Tarea 4/index.html">Inicio</a></li>
+                <li><a href="../Tarea 3/index.html">Pérfil</a></li>
+                <li><a href="index.html">Registro</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <h1>Registro</h1>
+            <form action="#" method="get">
+                <fieldset>
+                    <legend>Personales</legend>
+                    Nombre: <input type="text" required>
+                    Correo Electronico: <input type="email" placeholder="@gmail.com" required>
+                    Contraseña: <input type="password" required>
+
+                    <input class="inline" type="radio" name="info1" value="f"> Mujer<br>
+                    <input class="inline" type="radio" name="info1" value="m"> Hombre<br>         
+                </fieldset>
+                <fieldset>
+                        <legend>Sobre ti</legend>
+                        <p>¿Que preferies ser en un juego?</p>
+                        <input type="checkbox" name="info2" value="h"> Healer
+                        <input type="checkbox" name="info2" value="d"> Damage
+                        <input type="checkbox" name="info2" value="s"> Support<br>
+                        Color Favorito: <input class="inline" type="color"><br>
+                        Cumpleaños: <input class="inline" type="date"><br>
+                        Temporada favorita del año:<br>
+                        <select class="margin" name="select1">
+                            <option value="temp1">Primavera</option>
+                            <option value="temp2">Verano</option>
+                            <option value="temp3">Otoño</option>
+                            <option value="temp4">Invierno</option>
+                        </select>
+                </fieldset>
+                <fieldset>
+                        Imagen:<br> <img id="imagen" src="img/avatarDefault.png"/><br>
+                        <input type="file" onchange="readImagen(this);" accept=".jpg, .jpeg, .png">
+                </fieldset>
+                <input class="InputButton" type="submit" value="Enviar">
+                <input class="InputButton" type="reset" value="Borrar">
+            </form>
+        </div>
+    </body>
+</html>

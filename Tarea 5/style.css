@@ -1,0 +1,85 @@
+body {
+    background-image: url("img/bg.png");
+    background-repeat: repeat;
+}
+#menu{
+    position: fixed;
+    background-color: black;
+    width: 98%;
+    border-radius: 3px;
+    top: 0;
+}
+#imagen{
+    max-width: 200px;
+    max-height: 200px;
+}
+fieldset{
+    display: block;
+    margin: 10px;
+    min-width: 300px;
+}
+select{
+    min-width: 200px;
+}
+input{
+    display: block;
+    margin: 10px;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"]{
+    width: 300px;
+}
+input[type="checkbox"]{
+    margin: 0 10px 20px;
+    display: inline;
+}
+.InputButton{
+   display: inline-block;
+   border: 1px solid #ffea8e;
+   background-color: #ffea8e;
+   width: 100px;
+   height: 25px;
+}
+.InputButton:hover{
+    box-shadow: 2px 2px 8px #888888;
+    border: 1px solid #ffdc40;
+    background-color: #ffdc40;
+}
+.inline{ display: inline; }
+.margin{ margin: 10px 0;}
+ul{
+    margin: 0;
+    padding: 0;
+    top: 0;
+    list-style-type: none;
+}
+li{
+    float: left;
+    padding: 10px;
+}
+li a{
+    display: block;
+    text-decoration: none;
+    color:white;
+}
+li:hover{
+    background-color: pink;
+}
+.container{
+    min-height: 60%;
+    margin: 5%;
+}
+.container h1{
+    width: 100%;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 3px;
+    color: pink;
+}
+.container img{
+    border-radius: 3px;
+    max-width: 500px;
+    max-height: 200px;
+    margin: 0;
+}
