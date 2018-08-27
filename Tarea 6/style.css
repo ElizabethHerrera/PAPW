@@ -1,0 +1,32 @@
+body {
+    background-image: url("../Tarea 3/img/bg.png");
+    background-repeat: repeat;
+}
+#menu{
+    position: fixed;
+    background-color: black;
+    width: 98%;
+    border-radius: 3px;
+    top: 0;
+}
+.margin{
+    margin: 5% 10px;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    top: 0;
+    list-style-type: none;
+}
+li{
+    float: left;
+    padding: 10px;
+}
+li a{
+    display: block;
+    text-decoration: none;
+    color:white;
+}
+li:hover{
+    background-color: pink;
+}

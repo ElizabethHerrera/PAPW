@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id="menu">
+            <ul>
+                <li><a href="../Tarea 4/index.html">Inicio</a></li>
+                <li><a href="../Tarea 3/index.html">Pérfil</a></li>
+                <li><a href="index.html">Registro</a></li>
+            </ul>
+        </div>
+        <div class="margin">
+                <h1>Ejercicio III</h1>
+                <p>Calcular el valor de cada ángulo &alpha; de un polígono regular de <i>n</i> lados.</p>
+                <input type="number" id="angulo" min="3" value="3">
+                <input type="button" onclick="lados()" value="Calcular">
+                <p id="resultado">Resultado: </p>
+        </div>
+        
+        <script>
+            function lados(){
+                var n = document.getElementById("angulo").value;
+                var r = 180 * (n - 2) / n;
+                var e = document.getElementById("resultado");
+                e.innerHTML = "Resultado: " + r + "°";
+            }
+        </script>
+    </body>
+</html>
