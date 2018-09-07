@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="jquery-3.3.1.min.js"></script>
     </head>
     <body>
         <div id="menu">
@@ -20,10 +21,15 @@
         
         <script>
             function lados(){
-                var n = document.getElementById("angulo").value;
+                $("#resultado").empty();
+                var n = $("#angulo").val();
+                //console.log($("#angulo").val());
+                //var n = document.getElementById("angulo").value;
                 var r = 180 * (n - 2) / n;
-                var e = document.getElementById("resultado");
-                e.innerHTML = "Resultado: " + r + "°";
+                //console.log(r);
+                $("#resultado").append("Resultado: ", r , "°");
+                //var e = document.getElementById("resultado");
+                //e.innerHTML = "Resultado: " + r + "°";
             }
         </script>
     </body>
