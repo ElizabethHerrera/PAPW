@@ -1,0 +1,132 @@
+<!--
+    + Redondear valor del precio a 00/50/99 centavos. 
+-->
+
+<html>
+    <head>
+        <title>La Colmena - Venta y Compra</title>
+        <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <style>
+            .categoriesList{
+                list-style-type: none;
+                padding: 0;
+                display: inline-block;
+            }
+            input[type="text"],
+            input[type="number"]{
+                width: 250px;
+            }
+            #descriptionInput{
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top">
+            <a href="#"><img src="img/logo.png" id="logo"/></a>
+            <input type="search" id="topSearchBar" placeholder="Buscar...">
+
+            <div id="insideTopRight">
+                <table id="tableUser">
+                <!-- Menu Usuario /////////////////////////////////////////////////// -->
+                    <tr>
+                        <td><a href="#" id="userName">Elizabeth</a></td>
+                        <td rowspan="2"><img src="img/avatar.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dropdown">
+                                <button class="dropdownbutton">Cuenta</button>
+                                <div class="dropdown-content">
+                                    <a href="#">Mis articulos</a>
+                                    <a href="#">Historial</a>
+                                    <hr>
+                                    <a href="index.html" onclick="logOut();">Cerrar sesión</a>
+                                </div>
+                            </div>
+                        </td>                                             
+                    </tr>
+                </table>      
+                <!-- Fin Menu Usuario /////////////////////////////////////////////// -->
+                <!-- Iniciar Sesion /////////////////////////////////////////////// -->
+                <table id="tableNoUser">
+                    <tr>
+                        <td><a href="newAccount.html" id="userName">Crear cuenta</a></td>
+                        <td rowspan="2"><img src="img/avatarDefault.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="logIn">
+                                <button id="logInButton" onclick="iniciarSesion()">Iniciar sesión</button>
+                                
+                            </div>
+                        </td>                                             
+                    </tr>               
+                </table>
+                <div id=logInContent>
+                    <label>Iniciar sesión para continuar</label>
+                    <button id="closeLogIn" onclick="cerrarVentana()">X</button>
+                    <form name="form" onsubmit="setCookie('username', 7);">
+                        <input type="text" id="inputName" name="name" placeholder="Correo o Nombre de usuario...">
+                        <input type="password" id="inputPassword" name="pass" placeholder="Contrasena...">
+                        <input type="checkbox" id="checkUser" name="check">Recordar usuario<br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <!-- Fin Iniciar Sesion /////////////////////////////////////////////// --> 
+            </div>
+            <a href="#" title="Carrito">
+                <img class="topIcons" src="img/icons/shopping.png"/>
+            </a>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>Nombre del articulo: </td>                                        
+                    <td><input type="text"></td>                                         
+                </tr>
+                <tr>
+                    <td>Descripcion: </td>                    
+                    <td><input id="descriptionInput" type="text"></td>                                        
+                </tr>
+                <tr>
+                    <td>Categorias: </td>
+                    <td>
+                        <ul class="categoriesList">
+                            <li><input type="checkbox">Automovil</li>
+                            <li><input type="checkbox">Electrodomesticos</li>
+                            <li><input type="checkbox">Hogar</li>
+                            <li><input type="checkbox">VideoJuegos</li>
+                            <li><input type="checkbox">Joyeria</li>
+                        </ul>
+                        <ul class="categoriesList">
+                            <li><input type="checkbox">Ropa</li>
+                            <li><input type="checkbox">Libros</li>
+                            <li><input type="checkbox">Muebles</li>
+                            <li><input type="checkbox">Juguetes</li>
+                            <li><input type="checkbox">Musica</li>
+                        </ul>
+                    </td>                                                                                                                                 </td>                                                        
+                </tr>
+                <tr>
+                    <td>Precio:</td>                                       
+                    <td><input type="number" min="1" placeholder="500" required></td> 
+                </tr>
+                <tr>
+                    <td>Unidades:</td>                                       
+                    <td><input type="number" min="1" value="1"></td>
+                    
+                </tr>
+                <tr>
+                    <td colspan="2">¿Mostrar la cantidad de unidades restantes?</td>       
+                </tr>
+                <tr>
+                    <td><input type="radio" name="UnidadesQ">Sí</td>
+                    <td><input type="radio" name="UnidadesQ">No</td>
+                </tr>
+            </table>                    
+        </div>
+    </body>
+</html>
