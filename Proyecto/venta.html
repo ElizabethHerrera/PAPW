@@ -1,0 +1,534 @@
+<!--
+    + Agregar las estrellas para calificar
+    + Tienen que ser ascendentes los comentarios
+-->
+
+<html>
+    <head>
+        <title>La Colmena - Venta y Compra</title>
+        <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!--/// Permite el uso de JQuery ///-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <style>
+            h1{
+                font-family: "Dosis";
+                font-size: 30px;
+            }
+            .container{
+                margin: 2% 8%;
+                padding: 10px;
+               
+            }
+            #principalImage{
+                width: 400px;
+                height: 400px;
+            }
+            #leftContainer, #rightContainer{          
+                margin: 0 10px;
+                display: inline-block;
+                vertical-align: top;  
+            }
+            #addTo{
+                width: 40px;
+                height: 40px;          
+            }
+            #addTo:focus { outline: none; }
+            #description{
+                text-align: justify;
+                width: 500px;
+                display: block;
+            }
+            #rightContainer hr{
+                width: 500px;
+                border: 1px solid #ffc318;
+            }
+            .iconsArt{
+                width: 30px;
+                height: 30px;
+            }
+            .trPreview{
+                text-align: center;
+            }
+            .preview{
+                cursor: pointer;
+                width: 80px;
+                height: 80px;
+            }
+            .preview:hover ~ td div{
+                visibility: visible;
+            }
+            #principalVideo{
+                display: none;
+            }
+            #iconsList, #tagList{
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            #iconsList li{
+                float: left;
+                display: block;
+                margin-right: 3px;
+            }
+            #tagList li{
+                color: white;
+                cursor: default;
+                float: left;
+                display: block;
+                margin-right: 3px;
+                padding: 3px 10px;
+                background-color: #ffc318;
+                border-radius: 3px;
+            }
+            #vendedorNombre{ margin: 1em 0 3px 0}
+            #vendedorNombre:hover ~ div {
+                display: block;          
+            }
+            #infoAdiccional{
+                position: absolute;
+                display: none;
+                background-color: #252525;
+                padding: 10px;
+                border-radius: 5px;
+                margin: 0 40px;
+                color: white;
+                box-shadow: 2px 2px 8px #888888;            
+            }
+            #infoAdiccional ul{
+                list-style-type: none;
+                margin: 0;
+                padding: 4px;
+            }
+            #infoAdiccional label{
+                color:#ffc318;
+            }
+            .commentBox{
+                margin-bottom: 15px;
+                margin-top: 20px;
+            }
+            .cmtAvatar{
+                width: 50px;
+                height: 50px;
+            }
+            .topTd{
+                background-color:#252525; 
+                color: white;
+                padding: 5px 10px;
+                border-radius: 10px 0 10px 0;
+            }
+            .commentInfo{ 
+                margin: 0;
+                padding: 0;
+            }
+            .commentInfo li{ 
+                float: left;
+                display: block;
+                margin-right: 20px; 
+            }
+            #textareaArticle{
+                min-width: 100%;
+                max-width: 100%;
+                min-height: 30px;
+                max-height: 100px;
+            }
+            #textareaSubmit{
+                margin: 5px;
+                float: right;
+                cursor: pointer;
+                color: white;
+                width: 80px;
+                height: 30px;
+                border-radius: 3px;
+                border: 2px solid #ffc318;
+                background-color:#ffc318;
+            }
+            .modal{
+                display: none;
+                position: fixed;
+                padding-top: 250px;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                background-color: rgb(0,0,0); 
+                background-color: rgba(0,0,0,0.4);
+            }
+            .modalContent{
+                margin: auto;
+                border-radius: 10px 0 10px 0;
+                padding: 10px;
+                border: 1px solid #888;
+                width: 30%;
+                height: 20%;
+                background-color: white;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            }
+            .modalContent p, input[type="number"], select{ 
+                margin: 5px; 
+            }
+            .modalContent input[type="submit"]{
+                display: block;
+                margin: 0;
+                float: right;
+                cursor: pointer;
+                color: white;
+                height: 30px;
+                border-radius: 3px;
+                border: 2px solid #ffc318;
+                background-color:#ffc318;
+            }
+            .modalContent button{
+                float: right;
+                top: 0;
+                cursor: pointer;
+                color: white;
+                border-radius: 3px;
+                border: 2px solid #ffc318;
+                background-color:#ffc318; 
+            }
+        </style>
+        <script>
+            $(document).ready(function(){
+                $(".preview").hover(function(){
+                    var images = $(this).attr("src");
+                    //alert(images);      
+                    $("#principalImage").attr("src", images);               
+                });         
+            });
+            $(function(){
+                var tags = 3;
+                if(tags >= 2){
+                    $("#tag2").css("display", "block");
+                }
+                if(tags >= 3){
+                    $("#tag2").css("display", "block");
+                    $("#tag3").css("display", "block");
+                }
+            });
+            function ShowVideo(){
+                $("#principalImage").css("display", "none");
+                $("#principalVideo").css("display", "block");
+            }
+            function ShowImage(){
+                $("#principalImage").css("display", "block");
+                $("#principalVideo").css("display", "none");
+            }
+            function AddToCart(){
+                $(".modal").css("display", "block");
+            }
+            function CloseAdd(){
+                $(".modal").css("display", "none");
+            }
+        </script>
+    </head>
+    <body>
+        <div id="top">
+            <a href="#"><img src="img/logo.png" id="logo"/></a>
+            <input type="search" id="topSearchBar" placeholder="Buscar...">
+
+            <div id="insideTopRight">
+                <table id="tableUser">
+                <!-- Menu Usuario /////////////////////////////////////////////////// -->
+                    <tr>
+                        <td><a href="#" id="userName">Elizabeth</a></td>
+                        <td rowspan="2"><img src="img/avatar.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dropdown">
+                                <button class="dropdownbutton">Cuenta</button>
+                                <div class="dropdown-content">
+                                    <a href="#">Mis articulos</a>
+                                    <a href="#">Historial</a>
+                                    <hr>
+                                    <a href="index.html" onclick="logOut();">Cerrar sesión</a>
+                                </div>
+                            </div>
+                        </td>                                             
+                    </tr>
+                </table>      
+                <!-- Fin Menu Usuario /////////////////////////////////////////////// -->
+                <!-- Iniciar Sesion /////////////////////////////////////////////// -->
+                <table id="tableNoUser">
+                    <tr>
+                        <td><a href="newAccount.html" id="userName">Crear cuenta</a></td>
+                        <td rowspan="2"><img src="img/avatarDefault.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="logIn">
+                                <button id="logInButton" onclick="iniciarSesion()">Iniciar sesión</button>
+                               
+                            </div>
+                        </td>                                             
+                    </tr>               
+                </table>
+                <div id=logInContent>
+                    <label>Iniciar sesión para continuar</label>
+                    <button id="closeLogIn" onclick="cerrarVentana()">X</button>
+                    <form name="form" onsubmit="setCookie('username', 7);">
+                        <input type="text" id="inputName" name="name" placeholder="Correo o Nombre de usuario...">
+                        <input type="password" id="inputPassword" name="pass" placeholder="Contrasena...">
+                        <input type="checkbox" id="checkUser" name="check">Recordar usuario<br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <!-- Fin Iniciar Sesion /////////////////////////////////////////////// --> 
+            </div>
+            <a href="#" title="Carrito">
+                <img class="topIcons" src="img/icons/shopping.png"/>
+            </a>
+        </div>
+        <!-- /////////////////////////// Nav Sidebar ///////////////////////////////  -->       
+        <div id="leftSidebar">
+            <div class="leftSidebarButton">                      
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/car.png"/></a></td>   
+                        <td><label>Automoviles</label></td>                      
+                    </tr>                  
+                </table>
+            </div>   
+            <div class="leftSidebarButton">         
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/tv.png"/></a></td>   
+                        <td><label>Electrodomesticos</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/oven.png"/></a></td>
+                        <td><label>Hogar</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/game.png"/></a></td>
+                        <td><label>VideoJuegos</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/jewel.png"/></a></td>
+                        <td><label>Joyeria</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/shirt.png"/></a></td>
+                        <td><label>Ropa</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/book.png"/></a></td>
+                        <td><label>Libros</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/sofa.png"/></a></td>
+                        <td><label>Muebles</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/bear.png"/></a></td>
+                        <td><label>Juguetes</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/music.png"/></a></td>
+                        <td><label>Musica</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+        </div>
+        <!-- /////////////////////////// Fin Nav Sidebar ///////////////////////////////  -->
+        <div class="container">
+            <div id="leftContainer">
+                <table>
+                    <tr>
+                        <td colspan="4" style="height: 400px;">
+                            <img id="principalImage" src="img/merch/4.jpg">                       
+                            <video id="principalVideo" width="400" controls autoplay>
+                                <source src="videos/Shinzou wo Sasageyo!.webm" type="video/webm">                               
+                            </video>                           
+                        </td>                    
+                    </tr>
+                    <tr class="trPreview">
+                        <td class="img"><img class="preview" src="img/merch/4.jpg" onclick="ShowImage()"></td>
+                        <td class="img"><img class="preview" src="img/merch/2.jpg" onclick="ShowImage()"></td>  
+                        <td class="img"><img class="preview" src="img/merch/3.jpg" onclick="ShowImage()"></td>
+                        <td class="img">
+                            <video class="preview" preload="metadata" onclick="ShowVideo()">
+                                <source src="videos/Shinzou wo Sasageyo!.webm#t=0.5" type="video/webm"  >                               
+                            </video>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="rightContainer">
+                <h1>Articulo Titulo</h1>
+                <p>Precio: $200.00</p>
+                <p>Unidades: En existencia.</p>                    
+                <p id="vendedorNombre">
+                    Publicado por: <a href="#">Dueño del articulo</a>
+                    <div id="infoAdiccional">
+                        <ul>
+                            <li><label>Direccion: </label>Monterrey, Mexico</li>
+                            <li><label>Telefono: </label>811-XXX-XXX</li>
+                            <li><label>Correo electronico: </label>infoAdiccional@gmail.com</li>
+                        </ul>                
+                    </div> 
+                </p>
+                <hr>
+                <ul id="tagList">
+                    <li id="tag1">Ropa</li>
+                    <li id="tag2" style="display: none;">Automoviles</li>
+                    <li id="tag3" style="display: none;">Juguetes</li>
+                </ul>
+                <br>
+                <p id="description"> 
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <table style="width: 400px;">
+                    <tr>
+                        <td>
+                            <p>Formas de pago:</p>
+                        </td>
+                        <td rowspan="2">
+                            <input id="addTo" type="image" src="img/icons/add.png" title="Agregar a carrito" onclick="AddToCart()">                                     
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Efectivo</li>
+                                <li>Tarjeta de Credito</li>                                       
+                            </ul>      
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                <hr>
+                <ul id="iconsList">
+                    <li><img class="iconsArt" src="img/icons/eye.png"/>16</li>
+                    <li><img class="iconsArt" src="img/icons/star.png"/>7.5</li>
+                    <li><img class="iconsArt" src="img/icons/bubbleChat.png"/>3</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Comentarios</h1>
+            <div class="commentBox">
+                <table>
+                    <tr>
+                        <td class="topTd" colspan="2">
+                            <ul class="commentInfo">
+                                <li>Nombre de Usuario</li>
+                                <li>09/09/18 - 16:38</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="cmtAvatar" src="img/merch/7.jpg">
+                        </td>
+                        <td>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+                        </td>
+                    </tr>
+                </table>           
+            </div>
+            <div class="commentBox">
+                <table>
+                    <tr>
+                        <td class="topTd" colspan="2">
+                            <ul class="commentInfo">
+                                <li>Nombre de Usuario</li>
+                                <li>03/09/18 - 07:25</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="cmtAvatar" src="img/merch/7.jpg">
+                        </td>
+                        <td>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p>
+                        </td>
+                    </tr>
+                </table>           
+            </div>
+        </div>
+        
+        <div class="container">
+            <textarea id="textareaArticle" placeholder="Escribir un comentario..."></textarea>
+            <input id="textareaSubmit" type="submit">
+        </div>
+
+        <div class="modal">
+            <div class="modalContent">
+                <button title="Eliminar articulo" onclick="CloseAdd()">X</button>
+                <p>Cantidad a comprar: <input type="number" min="1" value="1"></p>     
+                <select>
+                    <option>Efectivo</option>
+                    <option>Tarjeta de credito</option>
+                </select>
+                <p>Total: $200.00</p>        
+                <input type="submit" value="Agregar a carrito">
+            </div>        
+        </div>
+
+        <!--Footer///////////////////////////////////////////////////////////////////-->
+        <div id="containerBottom">
+                <img src="img/uanl.png"/>
+                <img src="img/fcfm.png"/>
+            <div class="insideContainerBottom">
+                <ul>
+                    <li>Facultad de Ciencias Fisico Matematicas</li>
+                    <li>Proyecto BDM/PAPW</li>
+                    <li>Elizabeth Herrera | 1632859</li>
+                </ul>
+                <ul style="border-left: 1px solid white;">
+                    <li>Multimedia Y Animacion Digital</li>
+                    <li><br></li>
+                    <li>elizabeth.herrera2530@gmail.com</li>
+                </ul>
+            </div>        
+        </div>
+    <!--End Footer/////////////////////////////////////////////////////////////////-->
+    </body>
+</html>
