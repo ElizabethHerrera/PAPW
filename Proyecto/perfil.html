@@ -1,0 +1,194 @@
+<!--
+    + No necesito un Mis articulos es el perfil
+    + El historial es otra pagina diferente
+    + cookie mediante php
+
+-->
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
+        <style>
+            #containerTop{
+                margin: 10px 0 10px 0;
+            }
+            #avatarPerfil{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                box-shadow: 2px 2px 8px #888888;
+            }
+            #portadaPerfil{
+                max-width: 900px;
+                max-height: 220px;
+                box-shadow: 2px 2px 8px #888888;
+                margin: 0 5%;
+            }
+            .left { padding : 10px;  }
+            .right{ width   : 90%;   }
+            #containerContent{
+                border: 1px solid black;
+                margin-top: 30px;
+            }
+            .box{
+                background-color: white;
+                margin: 10px 25%;
+                padding: 10px;
+                box-shadow: 2px 2px 8px #888888;
+            }
+            .box button{
+                float: right;
+                top: 0;
+            }
+            .box .prev{
+                border: 1px solid #ffc318;
+                max-width: 100px;
+                max-height: 100px;
+                border-radius: 3px;
+            }
+            .box .icons{
+                width: 30px;
+                height: 10px;
+            }
+            .box ul{
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            .box li{
+                float: left;
+                display: block;
+                margin-right: 3px;
+            }
+            .artTitle{
+                background-color: #ffc318;
+                width: 100%;
+                border-radius: 3px;
+                padding: 0 10px;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top">
+            <a href="#"><img src="img/logo.png" id="logo"/></a>
+            <input type="search" id="topSearchBar" placeholder="Buscar...">
+
+            <div id="insideTopRight">
+                <table id="tableUser">
+                <!-- Menu Usuario /////////////////////////////////////////////////// -->
+                    <tr>
+                        <td><a href="#" id="userName">Elizabeth</a></td>
+                        <td rowspan="2"><img src="img/avatar.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dropdown">
+                                <button class="dropdownbutton">Cuenta</button>
+                                <div class="dropdown-content">
+                                    <a href="#">Mis articulos</a>
+                                    <a href="#">Historial</a>
+                                    <hr>
+                                    <a href="index.html" onclick="logOut();">Cerrar sesión</a>
+                                </div>
+                            </div>
+                        </td>                                             
+                    </tr>
+                </table>      
+                <!-- Fin Menu Usuario /////////////////////////////////////////////// -->
+                <!-- Iniciar Sesion /////////////////////////////////////////////// -->
+                <table id="tableNoUser">
+                    <tr>
+                        <td><a href="newAccount.html" id="userName">Crear cuenta</a></td>
+                        <td rowspan="2"><img src="img/avatarDefault.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="logIn">
+                                <button id="logInButton" onclick="iniciarSesion()">Iniciar sesión</button>
+                                </div>
+                            </div>
+                        </td>                                             
+                    </tr>               
+                </table>
+                <div id=logInContent>
+                    <label>Iniciar sesión para continuar</label>
+                    <button id="closeLogIn" onclick="cerrarVentana()">X</button>
+                    <form name="form" onsubmit="setCookie('username', 7);">
+                        <input type="text" id="inputName" name="name" placeholder="Correo o Nombre de usuario...">
+                        <input type="password" id="inputPassword" name="pass" placeholder="Contrasena...">
+                        <input type="checkbox" id="checkUser" name="check">Recordar usuario<br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <!-- Fin Iniciar Sesion /////////////////////////////////////////////// --> 
+            </div>
+            <a href="#" title="Carrito">
+                <img class="topIcons" src="img/icons/shopping.png"/>
+            </a>
+        </div>
+        <div id="containerTop">
+            <table>
+                <tr>
+                    <td class="left">
+                        <img id="avatarPerfil" src="img/avatar.png">
+                    </td>
+                    <td class="right">
+                        <img id="portadaPerfil" src="img/portadaDefault.png">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="containerContent">    
+            <div class="box">
+                <button title="Eliminar articulo">X</button>
+                <button title="Editar articulo">E</button>
+                <table>
+                    <tr>
+                        <td rowspan="3">
+                            <img class="prev" src="img/merch/7.jpg">
+                        </td>
+                        <td colspan="3" class="artTitle">
+                            Articulo
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Vistas: 0</li>
+                                <li>Calificacion: 0.0</li>
+                                <li>Comentarios: 0</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <p>
+                                Descripcion del articulo.
+                            </p>                         
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+<!--Footer///////////////////////////////////////////////////////////////////-->
+        <div id="containerBottom">
+            <img src="img/uanl.png"/>
+            <img src="img/fcfm.png"/>
+        <div class="insideContainerBottom">
+            <ul>
+                <li>Facultad de Ciencias Fisico Matematicas</li>
+                <li>Proyecto BDM/PAPW</li>
+                <li>Elizabeth Herrera | 1632859</li>
+            </ul>
+            <ul style="border-left: 1px solid white;">
+                <li>Multimedia Y Animacion Digital</li>
+                <li><br></li>
+                <li>elizabeth.herrera2530@gmail.com</li>
+            </ul>
+        </div>        
+    </div>
+<!--End Footer/////////////////////////////////////////////////////////////////-->
+    </body>
+</html>
