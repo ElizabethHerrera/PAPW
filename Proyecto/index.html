@@ -1,0 +1,396 @@
+<!--
+   + Falta por hacer el descuento y colocarlo en sus respectivas posiciones
+   + Agregar Etiquetas de Head
+   + Que identifique mediantes cookies si hay o no usuario
+   + Usar la misma logica de display none, para poner o quitar el log In. 
+--> 
+<html>
+    <head>
+        <title>La Colmena - Venta y Compra</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
+        <!--////////////////////////////////-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <!--/// Permite el uso de JQuery ///-->
+        <style>
+            #containerCenter{
+                display: block;       
+                margin: 10px 8%;           
+            }
+            .containerTitle, .boxTitle{
+                margin: 0;
+                padding: 0 0 0 30px;
+                height: 40px;
+                font-family: "Dosis";
+                font-size: 30px;
+                border-radius: 15px;
+            }
+            .box{
+                display: inline-block;     
+                margin: 10px 0 0 13%;
+                width: 30%;           
+            } 
+            #containerCenter hr, .box hr{ border: 1px solid #ffc318; }
+            #boxContainerCenter, .boxContainerMiddle{ padding: 10px; }
+            .insideContainerCenter, .insideBox{
+                white-space: nowrap; 
+                display: inline-block;
+                margin: 5px;
+                padding: 10px;
+                width: 150px;
+                height: 220px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                box-shadow: 0px 2px 8px #888888;  
+                border-radius: 3px;
+                background-color: white;
+            }
+            .insideContainerCenter:hover, .insideBox:hover{
+                box-shadow: 0px 6px 8px #888888;
+            }
+            .insideContainerCenter input[type="image"], .box img{             
+                width: 150px;
+                height: 150px; 
+            }
+           .discount{
+               position: absolute;
+               top: 74%;
+               right: 10px;
+               background-color: lightgreen;
+            }
+        </style>
+        <script>
+            function iniciarSesion() {
+                document.getElementById("logInContent").style.display = "block";
+            }
+            function cerrarVentana(){
+                document.getElementById("logInContent").style.display = "none";
+            }
+
+            function logOut(){
+                Cookies.set('name', '', { path: '/'});
+                Cookies.set("pass", '', { path: '/'});
+            }
+
+            function readCookie(){
+                var c = Cookies.get("name");
+                alert(c);
+                if(Cookies.get() == ""){
+                    $("#tableUser").css("display", "block");
+                    $("#tableNoUser").css("display", "none");
+                }else{
+                    $("#tableUser").css("display", "none");
+                    $("#tableNoUser").css("display", "block");
+                }
+            }
+
+            function getCookie(cname) {
+                var name = cname + "=";    
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            function setCookie(cname, value, exdays) {          
+                var nombre = $('#inputName').val();
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                var expires = "expires=" + d.toGMTString();
+                
+
+                if ($("#checkUser").is(":checked")){
+                    $.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });              
+                    document.cookie = cname + "=" + nombre + ";" + expires + "; path=/;";         
+                }else{
+                    document.cookie = cname + "=" + nombre + ";"  + "; path=/;";
+                }       
+            }
+
+            function checkCookie() {
+                
+                alert("Your Cookie : " + document.cookie);
+                var user=getCookie("username");
+                if (user != "") {
+                    alert("Welcome again " + user);
+                } else {
+                    user = prompt("Please enter your name:","");
+                    if (user != "" && user != null) {
+                        setCookie("username", user, 30);
+                    }
+                }
+            }
+
+        </script>
+    </head>
+    <body onload="checkCookie()">
+        <div id="top">
+            <a href="#"><img src="img/logo.png" id="logo"/></a>
+            <input type="search" id="topSearchBar" placeholder="Buscar...">
+
+            <div id="insideTopRight">
+                <table id="tableUser">
+                <!-- Menu Usuario /////////////////////////////////////////////////// -->
+                    <tr>
+                        <td><a href="#" id="userName">Elizabeth</a></td>
+                        <td rowspan="2"><img src="img/avatar.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="dropdown">
+                                <button class="dropdownbutton">Cuenta</button>
+                                <div class="dropdown-content">
+                                    <a href="#">Mis articulos</a>
+                                    <a href="#">Historial</a>
+                                    <hr>
+                                    <a href="index.html" onclick="logOut();">Cerrar sesión</a>
+                                </div>
+                            </div>
+                        </td>                                             
+                    </tr>
+                </table>      
+                <!-- Fin Menu Usuario /////////////////////////////////////////////// -->
+                <!-- Iniciar Sesion /////////////////////////////////////////////// -->
+                <table id="tableNoUser">
+                    <tr>
+                        <td><a href="newAccount.html" id="userName">Crear cuenta</a></td>
+                        <td rowspan="2"><img src="img/avatarDefault.png" id="avatar"/></td> 
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="logIn">
+                                <button id="logInButton" onclick="iniciarSesion()">Iniciar sesión</button>                           
+                            </div>
+                        </td>                                             
+                    </tr>               
+                </table>
+                <div id=logInContent>
+                    <label>Iniciar sesión para continuar</label>
+                    <button id="closeLogIn" onclick="cerrarVentana()">X</button>
+                    <form name="form" onsubmit="setCookie('username', 7);">
+                        <input type="text" id="inputName" name="name" placeholder="Correo o Nombre de usuario...">
+                        <input type="password" id="inputPassword" name="pass" placeholder="Contrasena...">
+                        <input type="checkbox" id="checkUser" name="check">Recordar usuario<br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <!-- Fin Iniciar Sesion /////////////////////////////////////////////// --> 
+            </div>
+            <a href="#" title="Carrito">
+                <img class="topIcons" src="img/icons/shopping.png"/>
+            </a>
+        </div>
+    
+        <img src="img/title.png" id="title"/>
+
+        <!-- /////////////////////////// Nav Sidebar ///////////////////////////////  -->
+        
+        <div id="leftSidebar">
+            <div class="leftSidebarButton">                      
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/car.png"/></a></td>   
+                        <td><label>Automoviles</label></td>                      
+                    </tr>                  
+                </table>
+            </div>   
+            <div class="leftSidebarButton">         
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/tv.png"/></a></td>   
+                        <td><label>Electrodomesticos</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/oven.png"/></a></td>
+                        <td><label>Hogar</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/game.png"/></a></td>
+                        <td><label>VideoJuegos</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/jewel.png"/></a></td>
+                        <td><label>Joyeria</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/shirt.png"/></a></td>
+                        <td><label>Ropa</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/book.png"/></a></td>
+                        <td><label>Libros</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/sofa.png"/></a></td>
+                        <td><label>Muebles</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/bear.png"/></a></td>
+                        <td><label>Juguetes</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+            <div class="leftSidebarButton">                   
+                <table>
+                    <tr>
+                        <td><a href="#"><img class="iconSidebar" src="img/icons/music.png"/></a></td>
+                        <td><label>Musica</label></td>       
+                    </tr>                  
+                </table>
+            </div>
+        </div>
+        <!-- /////////////////////////// Fin Nav Sidebar ///////////////////////////////  -->
+    
+        <div id="containerCenter">
+            <p class="containerTitle">Lo más vendido</p>
+            <hr>
+            <div id="boxContainerCenter">
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/1.jpg"/>                  
+                    <p>$200</p>
+                    <p>Sueter cool de AOT</p>             
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>                  
+                    <p>$200</p>
+                    <p>No nombres grandes</p>
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Fucking fight ME</p>
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Something</p> 
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Something</p>
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Something</p>
+                </div>
+            </div>   
+        </div>
+    
+        <div class="box">
+            <p class="boxTitle">Lo más visto</p>
+            <hr>
+            <div class="boxContainerMiddle">
+                <div class="insideBox">
+                    <img src="img/merch/6.jpg"/>
+                </div>
+                <div class="insideBox">
+                    <img src="img/merch/6.jpg"/>
+                </div>
+            </div>          
+        </div>
+        
+        <div class="box">
+            <p class="boxTitle">Lo más buscado</p>
+            <hr>
+            <div class="boxContainerMiddle">
+                <div class="insideBox">
+                    <img src="img/merch/6.jpg"/>
+                </div>
+                <div class="insideBox">
+                    <img src="img/merch/6.jpg"/>
+                </div>
+            </div>          
+        </div>
+    
+        <div id="containerCenter">
+            <p class="containerTitle">Mejores calificados</p>
+            <hr>
+            <div id="boxContainerCenter">
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/1.jpg"/>                  
+                    <p>$200</p>
+                    <p>Sueter cool de AOT</p>           
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>                  
+                    <p>$200</p>
+                    <p>No nombres grandes</p>
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Fucking fight ME</p>
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Something</p>    
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Something</p>
+                </div>
+                <div class="insideContainerCenter">
+                    <input type="image" href="#" src="img/merch/5.jpg"/>
+                    <p>$300</p>
+                    <p>Something</p> 
+                </div>
+            </div>   
+        </div>
+        <div id="containerBottom">
+                <img src="img/uanl.png"/>
+                <img src="img/fcfm.png"/>
+            <div class="insideContainerBottom">
+                <ul>
+                    <li>Facultad de Ciencias Fisico Matematicas</li>
+                    <li>Proyecto BDM/PAPW</li>
+                    <li>Elizabeth Herrera | 1632859</li>
+                </ul>
+                <ul style="border-left: 1px solid white;">
+                    <li>Multimedia Y Animacion Digital</li>
+                    <li><br></li>
+                    <li>elizabeth.herrera2530@gmail.com</li>
+                </ul>
+            </div>        
+        </div>
+    </body>
+</html>
