@@ -1,0 +1,249 @@
+<!--
+   + Validaciones duh
+   + Add form
+   + Placeholder padding
+--> 
+<html>
+    <head>
+        <title>La Colmena - Registro</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet'>
+        <!--////////////////////////////////-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <!--/// Permite el uso de JQuery ///-->
+        <style>
+            th{ padding: 0 0 10px 0; }
+            #principalContainer{
+                margin: auto;
+                width: 80%;
+                height: 90%;
+                border-radius: 10px;
+                background-color: #252525;
+            }
+            #principalContainer h1{ 
+                margin: 10px;
+                color: white;
+                font-family: "Dosis";    
+            }
+            #logoRegister{
+                width: 120px;
+                height: 60px;
+            }
+            #principalcontainerTop hr{
+                border: 1px solid #ffc318;
+                width: 90%;
+            }
+            hr{ border: 1px solid #ffc318; }
+            #principalContent{
+                margin: auto;
+                width: 95%;
+                height: 80%;
+                padding: 10px;
+                border-radius: 10px;
+                background-color: white;
+            }
+            #principalContent input[type="submit"]{
+                cursor: pointer;
+                position: absolute;
+                width: 100px;
+                height: 30px;
+                right: 14%;
+                bottom: 15%;
+                border-radius: 3px;
+                border: 2px solid #ffc318;
+                background-color:#ffc318;
+            }
+            #principalContent input[type="submit"]:hover{
+                color: white;
+            }
+            .box{               
+                display: inline-block;   
+                padding: 10px;
+                background-color: #252525;
+                border-radius: 10px 0 10px 0;
+            }
+            .box input[type="text"],
+            .box input[type="password"],
+            .box input[type="email"], 
+            .box input[type="tel"] {
+                width: 150px;
+                height: 25px;    
+                border-radius: 3px;
+            }
+            .box table{                         
+                padding: 10px;
+                width: 480px;
+                background-color: white;
+            }
+            .menuItems{
+                margin: 0;
+                width: 150px;
+            }
+            .rightcontainer{
+                position: absolute;
+                margin: 0 10px;
+            }
+            #imgAvatar{
+                max-width: 120px;
+                max-height: 120px;
+            }
+            #imgPortada{
+                max-width: 380px;
+                max-height: 120px;
+            }
+            .inputTip:hover ~ td div{
+                visibility: visible;
+            }
+            .tiptext{
+                visibility: hidden;
+                padding: 3px;
+                border-radius: 3px;
+                background-color: #ffc318;
+            }
+        </style>
+        
+        <script>
+            function readAvatar(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e){
+                        $('#imgAvatar')
+                        .attr('src', e.target.result);
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }
+            function readPortada(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e){
+                        $('#imgPortada')
+                        .attr('src', e.target.result);
+                    };
+                reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="principalContainer">
+            <div id="principalcontainerTop">
+                <table>
+                    <tr>
+                        <td>
+                            <a href="index.html"><img src="img/logo.png" id="logoRegister" /></a>
+                        </td>
+                        <td>
+                            <h1>Registro de Usuario</h1>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+            </div>
+            <div id="principalContent">
+                <div class="box">
+                    <table>
+                        <th colspan="3">Información Personal</th>
+                        <tr>
+                            <td class="menuItems">Nombre:</td>
+                            <td><input type="text" name="" placeholder="" required></td>
+                        </tr>
+                        <tr>
+                            <td class="menuItems">Apellido:</td>
+                            <td><input type="text" name="" placeholder="Paterno" required></td>
+                            <td><input type="text" name="" placeholder="Materno" required></td>
+                        </tr>
+                        <tr>
+                            <td class="menuItems">Correo electrónico:</td>
+                            <td><input type="email" name="" placeholder="@correo.com" required></td>
+                        </tr>
+                        <tr>
+                            <td class="menuItems">Confirmar correo electrónico:</td>
+                            <td><input type="email" name="" placeholder="@correo.com" required></td>
+                        </tr>
+                        <tr>
+                            <td class="menuItems">Teléfono:</td>
+                            <td><input type="tel" name="" placeholder=""></td>
+                        </tr>
+                        <tr>
+                            <td class="menuItems">Dirección:</td>
+                            <td><input type="text" name="" placeholder=""></td>
+                        </tr>
+                    </table>
+                    <table style="margin-top: 10px;">
+                        <th colspan="3">Información de Cuenta</th>
+                        <tr>
+                            <td class="menuItems">Nombre de Usuario:</td>
+                            <td class="inputTip">
+                                <input type="text" name="" placeholder="">
+                            </td>
+                            <td>
+                                <div class="tiptext">No se podrá cambiar más adelante.</div>
+                            </td>        
+                        </tr>
+                        <tr>
+                            <td class="menuItems">Contraseña:</td>
+                            <td class="inputTip"><input type="password" name="" placeholder=""></td>
+                            <td>
+                                <div class="tiptext">
+                                    Mínimo 8 caracteres, una mayúscula, una minúscula y un número.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="menuItems">Confirmar contraseña:</td>
+                            <td><input type="password" name="" placeholder=""></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="box rightcontainer">
+                    <table>   
+                        <tr>
+                            <td>Imagen de pérfil:</td>
+                        </tr>
+                        <tr>
+                            <td><img id="imgAvatar" src="img/avatarDefault.png"/></td>
+                        </tr>
+                        <tr>
+                            <td><input type="file" onchange="readAvatar(this);" accept=".jpg, .jpeg, .png"></td>
+                        </tr>
+                        <tr><td><hr></td></tr>
+                        <tr>
+                            <td>Imagen de portada:</td>
+                        </tr>
+                        <tr>
+                            <td><img id="imgPortada" src="img/portadaDefault.png"/></td>
+                        </tr>
+                        <tr>
+                            <td><input type="file" onchange="readPortada(this);" accept=".jpg, .jpeg, .png"></td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <input type="submit" value="Submit">
+            </div>
+        </div>
+
+<!--Footer///////////////////////////////////////////////////////////////////-->
+        <div id="containerBottom">
+                <img src="img/uanl.png"/>
+                <img src="img/fcfm.png"/>
+            <div class="insideContainerBottom">
+                <ul>
+                    <li>Facultad de Ciencias Fisico Matematicas</li>
+                    <li>Proyecto BDM/PAPW</li>
+                    <li>Elizabeth Herrera | 1632859</li>
+                </ul>
+                <ul style="border-left: 1px solid white;">
+                    <li>Multimedia Y Animacion Digital</li>
+                    <li><br></li>
+                    <li>elizabeth.herrera2530@gmail.com</li>
+                </ul>
+            </div>        
+        </div>
+<!--End Footer/////////////////////////////////////////////////////////////////-->
+    </body>
+</html>
